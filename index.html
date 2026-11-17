@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <title>ghozd.sh · portafolio</title>
+  <meta name="description" content="Portafolio de Ghozd, desarrollador de bots de Discord">
+  <meta name="theme-color" content="#030a06">
+  <meta property="og:title" content="Ghozd · portafolio">
+  <meta property="og:description" content="Desarrollador de bots de Discord. Portafolio con estilo de terminal.">
+  <meta property="og:type" content="website">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/terminal.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/cv.css">
+
+  <script src="js/data.js" defer></script>
+  <script src="js/utils.js" defer></script>
+  <script src="js/art.js" defer></script>
+  <script src="js/views.js" defer></script>
+  <script src="js/terminal.js" defer></script>
+  <script src="js/commands.js" defer></script>
+  <script src="js/activity.js" defer></script>
+  <script src="js/cv.js" defer></script>
+  <script src="js/effects.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <canvas id="rain" aria-hidden="true"></canvas>
+
+  <nav class="top" aria-label="Navegación">
+    <a href="#home" id="top-left">ghozd.sh</a>
+    <span id="top-right"></span>
+  </nav>
+
+  <main class="page">
+    <!-- Vista 1: terminal -->
+    <section class="win" id="term" aria-label="Terminal">
+      <header class="bar">
+        <i></i><i></i><i></i>
+        <span class="bar-title">guest@ghozd.sh — bash — 80×24</span>
+      </header>
+      <div id="boot"></div>
+      <div id="out" role="log" aria-live="polite"></div>
+      <div id="term-prompt"></div>
+    </section>
+
+    <!-- Vista 2: CV (el contenido lo genera js/cv.js) -->
+    <section class="win" id="cvwin" aria-label="Currículum" hidden>
+      <header class="bar">
+        <i></i><i></i><i></i>
+        <span class="bar-title">guest@ghozd.sh — open cv.html</span>
+        <a class="back-link" href="#home">← volver</a>
+      </header>
+      <article id="cv-body"></article>
+      <div class="cv-out" id="cv-out" role="log" aria-live="polite"></div>
+      <div id="cv-prompt"></div>
+    </section>
+
+    <footer class="foot" id="foot"><span id="footer-text"></span></footer>
+  </main>
+
+  <noscript><p style="position:fixed;inset:auto 0 50%;text-align:center;color:#3dff8f;font-family:monospace">Este portafolio necesita JavaScript para funcionar.</p></noscript>
+</body>
+</html>

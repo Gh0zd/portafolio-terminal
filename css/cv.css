@@ -1,0 +1,177 @@
+/* Vista CV: ventana, contenido y consola inferior. */
+
+/* La ventana se ajusta al contenido; si no entra, el CV hace scroll por dentro */
+#cvwin {
+  height: auto;
+  max-height: 100%;
+  max-width: 900px;
+}
+
+#cv-body {
+  flex: 0 1 auto;
+  min-height: 0;
+  padding: 22px 26px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  text-shadow: 0 0 7px var(--glow);
+
+  @media (width <= 560px) { padding-inline: 14px; }
+
+  & p { margin: 0 0 10px; }
+
+  & h1 {
+    margin: 0 0 10px;
+    font-size: 26px;
+    font-weight: 500;
+
+    @media (width <= 560px) { font-size: 22px; }
+  }
+
+  & hr {
+    margin-block: 16px;
+    border: 0;
+    border-top: 1px solid var(--fg);
+  }
+}
+
+/* Resalta la sección a la que saltó un comando */
+.cv-section {
+  border-radius: 6px;
+
+  &.is-flashing { animation: flash 1.2s ease-out; }
+}
+
+@keyframes flash {
+  from { background: var(--bar); box-shadow: 0 0 0 6px var(--bar); }
+  to { background: transparent; box-shadow: 0 0 0 6px transparent; }
+}
+
+/* --- Cabecera -------------------------------------------------------------- */
+
+.cv-head {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+
+  @media (width <= 560px) { gap: 14px; }
+}
+
+.avatar {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 120px;
+  aspect-ratio: 1;
+  overflow: hidden;
+  font-size: 40px;
+  color: var(--hi);
+  background: radial-gradient(circle, var(--dim) 1px, transparent 1.6px) 0 0 / 6px 6px, var(--bar);
+  border: 2px solid var(--fg);
+  border-radius: 12px;
+  animation: avatar-pulse 3s ease-in-out infinite;
+
+  @media (width <= 560px) { width: 96px; }
+  @media (height <= 520px) { width: 84px; }
+
+  & img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.25) brightness(1.05);
+  }
+
+  /* Con foto: tinte del tema y líneas de barrido */
+  &.has-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--fg);
+    mix-blend-mode: multiply;
+  }
+
+  &.has-photo::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: repeating-linear-gradient(0deg, rgb(0 0 0 / 0.28) 0 1px, transparent 1px 3px);
+    animation: avatar-scan 5s linear infinite;
+  }
+}
+
+@keyframes avatar-pulse {
+  0%, 100% { box-shadow: 0 0 12px var(--glow); translate: 0; }
+  50% { box-shadow: 0 0 24px var(--glow); translate: 0 -2px; }
+}
+
+@keyframes avatar-scan {
+  to { background-position: 0 3px; }
+}
+
+.badge {
+  display: inline-flex;
+  margin: 0 6px 6px 0;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--dim);
+
+  & span, & b { padding: 1px 8px; }
+  & b { color: var(--bg); background: var(--fg); }
+}
+
+/* --- Secciones ------------------------------------------------------------- */
+
+.cv-command { margin-block-start: 22px; }
+
+.hl {
+  padding-inline: 3px;
+  color: var(--hi);
+  background: var(--bar);
+}
+
+.job {
+  margin-block: 12px 18px;
+  padding-block: 2px;
+  padding-inline-start: 14px;
+  border-inline-start: 2px solid var(--dim);
+
+  & h3 {
+    margin-block: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--hi);
+  }
+
+  & ul { margin: 0; padding: 0; list-style: none; }
+
+  & li {
+    position: relative;
+    margin-block: 3px;
+    padding-inline-start: 16px;
+
+    &::before { content: "›"; position: absolute; inset-inline-start: 0; color: var(--dim); }
+  }
+}
+
+.job-when {
+  font-size: 13px;
+  color: var(--key);
+}
+
+/* --- Salida de la consola del CV (siempre visible abajo) ------------------- */
+
+.cv-out {
+  flex: none;
+  max-height: 7em;
+  padding: 6px 20px 0;
+  overflow-y: auto;
+  border-top: 1px solid var(--line);
+
+  &:empty { display: none; }
+  @media (width <= 560px) { padding-inline: 14px; }
+}

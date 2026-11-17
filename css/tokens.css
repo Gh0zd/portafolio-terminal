@@ -1,0 +1,36 @@
+/* Tokens y temas: cada tema solo redefine variables, el resto del CSS no usa colores fijos. */
+
+:root {
+  --bg: #030a06;
+  --win: #05110a;
+  --bar: #071a0f;
+  --line: #0f3a22;
+  --fg: #3dff8f;
+  --dim: #2f9a62;
+  --key: #6df0ff;
+  --hi: #a8ffd0;
+  --warn: #ffb454;
+  --glow: color-mix(in srgb, var(--fg) 35%, transparent);
+
+  --font-mono: ui-monospace, "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+  --radius: 10px;
+  --cursor-width: 2px; /* barra fina; con <html data-cursor="block"> pasa a bloque */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  color-scheme: dark;
+
+  &[data-cursor="block"] {
+    --cursor-width: 0.55em;
+  }
+
+  &[data-theme="amber"] {
+    --bg: #0a0703; --win: #110b05; --bar: #1a1007; --line: #3a2a0f;
+    --fg: #ffb454; --dim: #a8742a; --key: #ffe08a; --hi: #ffe9c2; --warn: #ff7a59;
+  }
+
+  &[data-theme="cyan"] {
+    --bg: #030809; --win: #05100f; --bar: #071a1a; --line: #0f323a;
+    --fg: #6df0ff; --dim: #2f8f9a; --key: #a8ffd0; --hi: #d6fbff;
+  }
+}
